@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Tickiting Application</title>
+    <!-- Bootstrap core CSS -->
+    <link href="../../../../css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="panel panel-primary">
+                    <h4 class="heading"><strong>All Tickets</strong></h4>
+                    <p><a href="<?=$router->pathFor('ticket-new') ?>">Add new ticket</a></p>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Component</th>
+                                <th>Description</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php 
+                            if(count($tickets) > 0):
+                                foreach($tickets as $ticket): ?>
+                                <tr>
+                                    <td><?=$ticket->getTitle() ?></td>
+                                    <td><?=$ticket->getComponent() ?></td>
+                                    <td><?=$ticket->getShortDescription() ?> ...</td>
+                                    <td>
+                                        <a href="<?=$router->pathFor('ticket-detail', ['id' => $ticket->getId()])?>">view</a>
+                                        / <a href="<?=$router->pathFor('ticket-delete', ['id' => $ticket->getId()])?>">delete</a>
+                                    </td>
+                                </tr>
+                                <?php endforeach; 
+                             else: ?>
+                                <tr>
+                                    <td cols="4" >No current tickets</td>
+                                </tr/>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
